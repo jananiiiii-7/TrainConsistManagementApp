@@ -4,7 +4,6 @@ import java.util.stream.Collectors;
 
 public class TrainConsistManagementApp {
 
-    // Bogie class
     static class Bogie {
         String name;
         int capacity;
@@ -15,7 +14,7 @@ public class TrainConsistManagementApp {
         }
     }
 
-    // UC8: Filter bogies using streams
+
     public static List<Bogie> filterBogiesByCapacity(List<Bogie> bogies, int threshold) {
         return bogies.stream()
                 .filter(b -> b.capacity > threshold)
