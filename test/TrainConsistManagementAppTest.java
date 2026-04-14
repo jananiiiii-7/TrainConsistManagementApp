@@ -4,52 +4,52 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TrainConsistManagementAppTest {
 
     @Test
-    void testSort_BasicSorting() {
+    void testSearch_BogieFound() {
 
-        int[] data = {72, 56, 24, 70, 60};
+        String[] bogies = {"BG101","BG205","BG309","BG412","BG550"};
 
-        TrainConsistManagementApp.bubbleSort(data);
+        boolean result = TrainConsistManagementApp.searchBogie(bogies, "BG309");
 
-        assertArrayEquals(new int[]{24, 56, 60, 70, 72}, data);
+        assertTrue(result);
     }
 
     @Test
-    void testSort_AlreadySortedArray() {
+    void testSearch_BogieNotFound() {
 
-        int[] data = {24, 56, 60, 70, 72};
+        String[] bogies = {"BG101","BG205","BG309","BG412","BG550"};
 
-        TrainConsistManagementApp.bubbleSort(data);
+        boolean result = TrainConsistManagementApp.searchBogie(bogies, "BG999");
 
-        assertArrayEquals(new int[]{24, 56, 60, 70, 72}, data);
+        assertFalse(result);
     }
 
     @Test
-    void testSort_DuplicateValues() {
+    void testSearch_FirstElementMatch() {
 
-        int[] data = {72, 56, 56, 24};
+        String[] bogies = {"BG101","BG205","BG309","BG412","BG550"};
 
-        TrainConsistManagementApp.bubbleSort(data);
+        boolean result = TrainConsistManagementApp.searchBogie(bogies, "BG101");
 
-        assertArrayEquals(new int[]{24, 56, 56, 72}, data);
+        assertTrue(result);
     }
 
     @Test
-    void testSort_SingleElementArray() {
+    void testSearch_LastElementMatch() {
 
-        int[] data = {50};
+        String[] bogies = {"BG101","BG205","BG309","BG412","BG550"};
 
-        TrainConsistManagementApp.bubbleSort(data);
+        boolean result = TrainConsistManagementApp.searchBogie(bogies, "BG550");
 
-        assertArrayEquals(new int[]{50}, data);
+        assertTrue(result);
     }
 
     @Test
-    void testSort_AllEqualValues() {
+    void testSearch_SingleElementArray() {
 
-        int[] data = {40, 40, 40};
+        String[] bogies = {"BG101"};
 
-        TrainConsistManagementApp.bubbleSort(data);
+        boolean result = TrainConsistManagementApp.searchBogie(bogies, "BG101");
 
-        assertArrayEquals(new int[]{40, 40, 40}, data);
+        assertTrue(result);
     }
 }
