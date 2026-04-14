@@ -14,6 +14,7 @@ public class TrainConsistManagementApp {
         }
     }
 
+
     public static List<Bogie> filterBogiesByCapacity(List<Bogie> bogies, int threshold) {
         return bogies.stream()
                 .filter(b -> b.capacity > threshold)
@@ -21,7 +22,6 @@ public class TrainConsistManagementApp {
     }
 
     public static void main(String[] args) {
-
         System.out.println("====================================");
         System.out.println("UC8 - Filter Passenger Bogies Using Streams ");
         System.out.println("====================================\n");
@@ -34,6 +34,7 @@ public class TrainConsistManagementApp {
         bogies.add(new Bogie("General", 90));
 
         System.out.println("All Bogies:");
+
         for (Bogie b : bogies) {
             System.out.println(b.name + " -> " + b.capacity);
         }
@@ -41,6 +42,7 @@ public class TrainConsistManagementApp {
         List<Bogie> filtered = filterBogiesByCapacity(bogies, 60);
 
         System.out.println("\nFiltered Bogies (Capacity > 60):");
+
         for (Bogie b : filtered) {
             System.out.println(b.name + " -> " + b.capacity);
         }
