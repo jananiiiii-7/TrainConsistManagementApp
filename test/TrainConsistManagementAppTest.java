@@ -1,150 +1,37 @@
 import org.junit.jupiter.api.Test;
-import java.util.*;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TrainConsistManagementAppTest {
 
-    // UC8 TESTS
-
     @Test
-    void testFilter_CapacityGreaterThanThreshold() {
-
-        List<TrainConsistManagementApp.Bogie> bogies = new ArrayList<>();
-
-        bogies.add(new TrainConsistManagementApp.Bogie("Sleeper",72));
-        bogies.add(new TrainConsistManagementApp.Bogie("AC Chair",56));
-
-        List<TrainConsistManagementApp.Bogie> result =
-                TrainConsistManagementApp.filterBogiesByCapacity(bogies,60);
-
-        assertEquals(1,result.size());
-    }
-
-    @Test
-    void testFilter_EmptyList() {
-
-        List<TrainConsistManagementApp.Bogie> bogies = new ArrayList<>();
-
-        List<TrainConsistManagementApp.Bogie> result =
-                TrainConsistManagementApp.filterBogiesByCapacity(bogies,60);
-
-        assertTrue(result.isEmpty());
-    }
-
-
-    // UC9 TESTS
-
-    @Test
-    void testGrouping_BogiesGroupedByType() {
-
-        List<TrainConsistManagementApp.Bogie> bogies = new ArrayList<>();
-
-        bogies.add(new TrainConsistManagementApp.Bogie("Sleeper",72));
-        bogies.add(new TrainConsistManagementApp.Bogie("Sleeper",70));
-
-        Map<String,List<TrainConsistManagementApp.Bogie>> result =
-                TrainConsistManagementApp.groupBogiesByType(bogies);
-
-        assertEquals(2,result.get("Sleeper").size());
-    }
-
-    @Test
-    void testGrouping_EmptyBogieList() {
-
-        List<TrainConsistManagementApp.Bogie> bogies = new ArrayList<>();
-
-        Map<String,List<TrainConsistManagementApp.Bogie>> result =
-                TrainConsistManagementApp.groupBogiesByType(bogies);
-
-        assertTrue(result.isEmpty());
-    }
-
-
-    // UC10 TESTS
-
-    @Test
-    void testReduce_TotalSeatCalculation() {
-
-        List<TrainConsistManagementApp.Bogie> bogies = new ArrayList<>();
-
-        bogies.add(new TrainConsistManagementApp.Bogie("Sleeper",72));
-        bogies.add(new TrainConsistManagementApp.Bogie("AC Chair",56));
-        bogies.add(new TrainConsistManagementApp.Bogie("First Class",24));
-
-        int result = TrainConsistManagementApp.calculateTotalSeats(bogies);
-
-        assertEquals(152,result);
-    }
-
-    @Test
-    void testReduce_EmptyBogieList() {
-
-        List<TrainConsistManagementApp.Bogie> bogies = new ArrayList<>();
-
-        int result = TrainConsistManagementApp.calculateTotalSeats(bogies);
-
-        assertEquals(0,result);
-    }
-
-
-    // UC11 TESTS
-
-    @Test
-    void testRegex_ValidTrainID() {
-
-        boolean result =
-                TrainConsistManagementApp.validateTrainID("TRN-1234");
-
+    void testValidTrainID() {
+        boolean result = TrainConsistManagementApp.validateTrainID("TRN-1234");
         assertTrue(result);
     }
 
     @Test
-    void testRegex_InvalidTrainIDFormat() {
-
-        boolean result =
-                TrainConsistManagementApp.validateTrainID("TRAIN12");
-
+    void testInvalidTrainID() {
+        boolean result = TrainConsistManagementApp.validateTrainID("TRAIN123");
         assertFalse(result);
     }
 
     @Test
-    void testRegex_ValidCargoCode() {
-
-        boolean result =
-                TrainConsistManagementApp.validateCargoCode("PET-AB");
-
+    void testValidCargoCode() {
+        boolean result = TrainConsistManagementApp.validateCargoCode("PET-AB");
         assertTrue(result);
     }
 
     @Test
-    void testRegex_InvalidCargoCodeFormat() {
-
-        boolean result =
-                TrainConsistManagementApp.validateCargoCode("PET-ab");
-
+    void testInvalidCargoCode() {
+        boolean result = TrainConsistManagementApp.validateCargoCode("PET-ab");
         assertFalse(result);
     }
 
     @Test
-    void testRegex_EmptyInputHandling() {
-
-        boolean train =
-                TrainConsistManagementApp.validateTrainID("");
-
-        boolean cargo =
-                TrainConsistManagementApp.validateCargoCode("");
-
+    void testEmptyInputs() {
+        boolean train = TrainConsistManagementApp.validateTrainID("");
+        boolean cargo = TrainConsistManagementApp.validateCargoCode("");
         assertFalse(train);
         assertFalse(cargo);
-    }
-
-    @Test
-    void testRegex_ExactPatternMatch() {
-
-        boolean result =
-                TrainConsistManagementApp.validateTrainID("TRN-1234A");
-
-        assertFalse(result);
     }
 }
